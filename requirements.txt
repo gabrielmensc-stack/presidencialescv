@@ -1,0 +1,8 @@
+streamlit==1.51.0
+pandas==2.3.3
+plotly==5.24.1
+folium==0.20.0
+streamlit-folium==0.25.3
+Pillow==12.0.0
+keplergl==0.3.2
+streamlit-keplergl==0.3.1

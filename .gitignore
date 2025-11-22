@@ -1,0 +1,18 @@
+# Virtual envs / cache
+.venv/
+__pycache__/
+*.pyc
+
+# Datos pesados / binarios
+*.db
+*.sqlite
+*.xlsx
+*.xls
+bases_datos_ad/
+
+# Descargas temporales
+.tmp.driveupload/
+tmp/
+
+# IDE
+*.code-workspace
