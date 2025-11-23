@@ -31,9 +31,12 @@ PHOTO_ALIASES = {
     "HAROLD MAYNE NICHOLLS SECUL": ["maynenichols", "mayne nicholls", "mayne nicholls secul"],
     "HAROLD MAYNE NICHOLLS": ["maynenichols", "mayne nicholls"],
     "JOHANNES KAISER BARENTS VON HONHAGEN": ["kaiser"],
+    "JOHANNES HOHENHAGEN": ["kaiser", "johannes kaiser"],
     "EDUARDO ANTONIO ARTES BRICHETTI": ["artes"],
     "SEBASTIAN PINERA ECHENIQUE": ["pinera"],
     "RICARDO LAGOS ESCOBAR": ["lagos"],
+    "HAROLD SECUL": ["harold mayne nicholls", "secul"],
+    "MARCO GUMUCIO": ["marco enriquez ominami", "meo"],
 }
 REGION_CENTER_FALLBACK = {
     "Arica y Parinacota": (-69.98, -18.48),
@@ -345,6 +348,9 @@ def short_name(full_name: str) -> str:
         "JEANNETTE JARA ROMAN": "Jeanette Jara",
         "JEANETTE JARA ROMAN": "Jeanette Jara",
         "FRANCO PARISI FERNANDEZ": "Franco Parisi",
+        "JOHANNES HOHENHAGEN": "Johannes Kaiser",
+        "HAROLD SECUL": "Harold Mayne-Nicholls",
+        "MARCO GUMUCIO": "Marco Enriquez-Ominami",
     }
     key = full_name.upper()
     if key in overrides:
