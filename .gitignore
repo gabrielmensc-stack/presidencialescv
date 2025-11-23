@@ -4,8 +4,6 @@ __pycache__/
 *.pyc
 
 # Datos pesados / binarios
-*.db
-*.sqlite
 *.xlsx
 *.xls
 bases_datos_ad/
