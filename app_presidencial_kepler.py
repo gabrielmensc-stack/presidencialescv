@@ -20,9 +20,10 @@ PALETTE = ["#3182bd", "#e6550d", "#31a354", "#756bb1", "#dd3497", "#636363", "#e
 ISLANDS = {"ISLA DE PASCUA", "JUAN FERNANDEZ"}
 PHOTO_ALIASES = {
     "MARCO ENRIQUEZ OMINAMI": ["meo", "enriquez ominami"],
-    "MARCO ENRIQUEZ OMINAMI GUMUCIO": ["meo", "enriquez ominami"],
+    "MARCO ENRIQUEZ-OMINAMI GUMUCIO": ["meo", "enriquez ominami"],
+    "MARCO ANTONIO ENRIQUEZ-OMINAMI GUMUCIO": ["meo", "enriquez ominami"],
     "MARCO ANTONIO ENRIQUEZ OMINAMI GUMUCIO": ["meo", "enriquez ominami"],
-    "MARCO ENRIQUEZ OMINAMI GUMUCIO": ["meo", "enriquez ominami"],
+    "MARCO ENRIQUEZ-OMINAMI GUMUCIO": ["meo", "enriquez ominami"],
     "FRANCO PARISI FERNANDEZ": ["parisi"],
     "EVELYN MATTHEI FORNET": ["matthei"],
     "JOSE ANTONIO KAST RIST": ["kast", "jak", "jose antonio kast"],
@@ -30,13 +31,14 @@ PHOTO_ALIASES = {
     "JEANNETTE JARA ROMAN": ["jara"],
     "HAROLD MAYNE NICHOLLS SECUL": ["maynenichols", "mayne nicholls", "mayne nicholls secul"],
     "HAROLD MAYNE NICHOLLS": ["maynenichols", "mayne nicholls"],
+    "HAROLD MAYNE-NICHOLLS": ["maynenichols", "mayne nicholls"],
+    "HAROLD MAYNE-NICHOLLS SECUL": ["maynenichols", "mayne nicholls"],
     "JOHANNES KAISER BARENTS VON HONHAGEN": ["kaiser"],
     "JOHANNES HOHENHAGEN": ["kaiser", "johannes kaiser"],
     "EDUARDO ANTONIO ARTES BRICHETTI": ["artes"],
     "SEBASTIAN PINERA ECHENIQUE": ["pinera"],
     "RICARDO LAGOS ESCOBAR": ["lagos"],
-    "HAROLD SECUL": ["harold mayne nicholls", "secul"],
-    "MARCO GUMUCIO": ["marco enriquez ominami", "meo"],
+    "HAROLD SECUL": ["harold mayne nicholls", "secul", "maynenichols", "mayne nicholls", "mayne nicholls secul"],
 }
 REGION_CENTER_FALLBACK = {
     "Arica y Parinacota": (-69.98, -18.48),
@@ -334,25 +336,29 @@ def get_photo_path(name_norm: str, photo_map: dict):
 
 
 def short_name(full_name: str) -> str:
-    overrides = {
-        "JOSE ANTONIO KAST RIST": "José Kast",
-        "JOSE ANTONIO KAST": "José Kast",
-        "MARCO ENRIQUEZ OMINAMI": "Marco Enríquez-Ominami",
-        "MARCO ANTONIO ENRIQUEZ OMINAMI GUMUCIO": "Marco Enríquez-Ominami",
-        "MARCO ENRIQUEZ OMINAMI GUMUCIO": "Marco Enríquez-Ominami",
+    overrides_raw = {
+        "JOSE ANTONIO KAST RIST": "Jose Kast",
+        "JOSE ANTONIO KAST": "Jose Kast",
+        "MARCO ENRIQUEZ-OMINAMI": "Marco Enriquez-Ominami",
+        "MARCO ENRIQUEZ OMINAMI": "Marco Enriquez-Ominami",
+        "MARCO ENRIQUEZ OMINAMI GUMUCIO": "Marco Enriquez-Ominami",
+        "MARCO ANTONIO ENRIQUEZ OMINAMI GUMUCIO": "Marco Enriquez-Ominami",
+        "MARCO ANTONIO ENRIQUEZ-OMINAMI GUMUCIO": "Marco Enriquez-Ominami",
+        "MARCO ENRIQUEZ-OMINAMI GUMUCIO": "Marco Enriquez-Ominami",
+        "MARCO GUMUCIO": "Marco Enriquez-Ominami",
         "HAROLD MAYNE NICHOLLS SECUL": "Harold Mayne-Nicholls",
         "HAROLD MAYNE NICHOLLS": "Harold Mayne-Nicholls",
+        "HAROLD SECUL": "Harold Mayne-Nicholls",
         "JOHANNES KAISER BARENTS VON HONHAGEN": "Johannes Kaiser",
-        "EDUARDO ANTONIO ARTES BRICHETTI": "Eduardo Artés",
+        "JOHANNES HOHENHAGEN": "Johannes Kaiser",
+        "EDUARDO ANTONIO ARTES BRICHETTI": "Eduardo Artes",
         "EVELYN MATTHEI FORNET": "Evelyn Matthei",
         "JEANNETTE JARA ROMAN": "Jeanette Jara",
         "JEANETTE JARA ROMAN": "Jeanette Jara",
         "FRANCO PARISI FERNANDEZ": "Franco Parisi",
-        "JOHANNES HOHENHAGEN": "Johannes Kaiser",
-        "HAROLD SECUL": "Harold Mayne-Nicholls",
-        "MARCO GUMUCIO": "Marco Enriquez-Ominami",
     }
-    key = full_name.upper()
+    overrides = {normalizar(k): v for k, v in overrides_raw.items()}
+    key = normalizar(full_name)
     if key in overrides:
         return overrides[key]
     parts = full_name.split()
