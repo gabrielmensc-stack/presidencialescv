@@ -1,0 +1,33 @@
+anio,region,comuna,candidato,partido,fuente,coalicion,votos
+2021,Arica y Parinacota,Arica,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,12000
+2021,Arica y Parinacota,Arica,Candidato Beta,Partido Dos,Sample,Coalicion Centro,8000
+2021,Tarapaca,Iquique,Candidato Beta,Partido Dos,Sample,Coalicion Centro,15000
+2021,Tarapaca,Iquique,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,9000
+2021,Antofagasta,Antofagasta,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,14000
+2021,Antofagasta,Calama,Candidato Beta,Partido Dos,Sample,Coalicion Centro,10000
+2021,Atacama,Copiapo,Candidato Beta,Partido Dos,Sample,Coalicion Centro,11000
+2021,Atacama,Vallenar,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,7000
+2021,Coquimbo,La Serena,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,16000
+2021,Coquimbo,Coquimbo,Candidato Beta,Partido Dos,Sample,Coalicion Centro,15000
+2021,Valparaiso,Valparaiso,Candidato Beta,Partido Dos,Sample,Coalicion Centro,18000
+2021,Valparaiso,Quillota,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,9000
+2021,Metropolitana de Santiago,Santiago,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,22000
+2021,Metropolitana de Santiago,Puente Alto,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,18000
+2021,Libertador General Bernardo O'Higgins,Rancagua,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,14000
+2021,Libertador General Bernardo O'Higgins,San Fernando,Candidato Beta,Partido Dos,Sample,Coalicion Centro,12000
+2021,Maule,Talca,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,13000
+2021,Maule,Curico,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,9000
+2021,Nuble,Chillan,Candidato Beta,Partido Dos,Sample,Coalicion Centro,12000
+2021,Nuble,San Carlos,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,8000
+2021,Biobio,Concepcion,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,19000
+2021,Biobio,Los Angeles,Candidato Beta,Partido Dos,Sample,Coalicion Centro,15000
+2021,La Araucania,Temuco,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,17000
+2021,La Araucania,Villarrica,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,12000
+2021,Los Rios,Valdivia,Candidato Beta,Partido Dos,Sample,Coalicion Centro,13000
+2021,Los Rios,La Union,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,11000
+2021,Los Lagos,Puerto Montt,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,16000
+2021,Los Lagos,Osorno,Candidato Beta,Partido Dos,Sample,Coalicion Centro,13000
+2021,Aysen del General Carlos Ibanez del Campo,Coyhaique,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,7000
+2021,Aysen del General Carlos Ibanez del Campo,Puerto Aysen,Candidato Beta,Partido Dos,Sample,Coalicion Centro,6000
+2021,Magallanes y de la Antartica Chilena,Punta Arenas,Candidato Gamma,Partido Tres,Sample,Coalicion Sur,8000
+2021,Magallanes y de la Antartica Chilena,Puerto Natales,Candidato Alpha,Partido Uno,Sample,Coalicion Norte,7000

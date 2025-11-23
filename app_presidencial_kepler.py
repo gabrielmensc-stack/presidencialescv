@@ -55,6 +55,40 @@ REGION_CENTER_FALLBACK = {
 }
 
 
+def ensure_sample_db():
+    """Create a small sample DB if the expected view is missing."""
+    db_path = Path(DB_PATH)
+    sample_csv = BASE_DIR / "sample_data" / "v_presidencial_coalicion.csv"
+    has_view = False
+    if db_path.exists():
+        try:
+            conn = sqlite3.connect(db_path)
+            cur = conn.execute("SELECT name FROM sqlite_master WHERE type IN ('table','view') AND name='v_presidencial_coalicion'")
+            has_view = cur.fetchone() is not None
+        except Exception:
+            has_view = False
+        finally:
+            try:
+                conn.close()
+            except Exception:
+                pass
+    if has_view or not sample_csv.exists():
+        return False
+    try:
+        df_sample = pd.read_csv(sample_csv)
+        conn = sqlite3.connect(db_path)
+        df_sample.to_sql("v_presidencial_coalicion", conn, if_exists="replace", index=False)
+        conn.close()
+        return True
+    except Exception as e:
+        st.error(f"No se pudo crear base de datos de ejemplo: {e}")
+        try:
+            conn.close()
+        except Exception:
+            pass
+        return False
+
+
 def normalizar(txt: str) -> str:
     import unicodedata
 
@@ -480,6 +514,10 @@ def main():
             st.image(str(logo_path), width=60)
     with col_title:
         st.title("Resultados Presidenciales (Kepler)")
+
+    sample_loaded = ensure_sample_db()
+    if sample_loaded:
+        st.info("Se cargaron datos de ejemplo desde sample_data/v_presidencial_coalicion.csv porque no se encontró data.db con la vista requerida.")
 
     df = cargar_datos()
     if df.empty:
