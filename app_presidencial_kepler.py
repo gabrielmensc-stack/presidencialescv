@@ -74,6 +74,110 @@ def ensure_sample_db():
                 pass
     if has_view or not sample_csv.exists():
         return False
+
+
+def ensure_views():
+    """Ensure required views exist on the real database."""
+    try:
+        conn = sqlite3.connect(DB_PATH)
+        conn.executescript(
+            """
+            CREATE VIEW IF NOT EXISTS v_comuna_region AS
+                SELECT DISTINCT
+                    comuna,
+                    region,
+                    region_num
+                FROM resultados_servel
+                WHERE comuna IS NOT NULL
+                  AND region IS NOT NULL;
+
+            CREATE VIEW IF NOT EXISTS v_presidencial_comuna AS
+                SELECT
+                    anio,
+                    vuelta,
+                    'TRICEL' AS fuente,
+                    region_num,
+                    region,
+                    comuna_num,
+                    comuna,
+                    candidato,
+                    partido,
+                    votos,
+                    votos_nulos,
+                    votos_blancos,
+                    total_votos,
+                    inscritos
+                FROM resultados_tricel
+                UNION ALL
+                SELECT
+                    anio,
+                    vuelta,
+                    'SERVEL' AS fuente,
+                    region_num,
+                    region,
+                    NULL       AS comuna_num,
+                    comuna,
+                    candidato,
+                    partido,
+                    votos,
+                    NULL       AS votos_nulos,
+                    NULL       AS votos_blancos,
+                    NULL       AS total_votos,
+                    NULL       AS inscritos
+                FROM resultados_servel
+                WHERE tipo = 'presidencial'
+                UNION ALL
+                SELECT
+                    s.anio,
+                    s.vuelta,
+                    'SERVEL_2025' AS fuente,
+                    cr.region_num,
+                    cr.region,
+                    NULL       AS comuna_num,
+                    s.comuna,
+                    s.candidato,
+                    NULL       AS partido,
+                    s.votos,
+                    NULL       AS votos_nulos,
+                    NULL       AS votos_blancos,
+                    NULL       AS total_votos,
+                    NULL       AS inscritos
+                FROM servel_presid_2025_comuna s
+                LEFT JOIN v_comuna_region cr
+                       ON s.comuna = cr.comuna;
+
+            CREATE VIEW IF NOT EXISTS v_presidencial_coalicion AS
+                SELECT
+                    v.anio,
+                    v.vuelta,
+                    v.fuente,
+                    v.region_num,
+                    v.region,
+                    v.comuna_num,
+                    v.comuna,
+                    v.candidato,
+                    v.partido,
+                    cp.coalicion,
+                    v.votos,
+                    v.votos_nulos,
+                    v.votos_blancos,
+                    v.total_votos,
+                    v.inscritos
+                FROM v_presidencial_comuna v
+                LEFT JOIN coalicion_partido cp
+                  ON v.partido = cp.partido
+                 AND v.anio BETWEEN cp.anio_inicio AND cp.anio_fin;
+            """
+        )
+        conn.close()
+        return True
+    except Exception as e:
+        st.error(f"No se pudieron crear las vistas requeridas: {e}")
+        try:
+            conn.close()
+        except Exception:
+            pass
+        return False
     try:
         df_sample = pd.read_csv(sample_csv)
         conn = sqlite3.connect(db_path)
@@ -518,6 +622,10 @@ def main():
     sample_loaded = ensure_sample_db()
     if sample_loaded:
         st.info("Se cargaron datos de ejemplo desde sample_data/v_presidencial_coalicion.csv porque no se encontró data.db con la vista requerida.")
+    else:
+        views_ok = ensure_views()
+        if views_ok:
+            st.caption("Vistas creadas/verificadas en data.db.")
 
     df = cargar_datos()
     if df.empty:
